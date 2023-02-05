@@ -66,8 +66,8 @@ export default function Player() {
   };
 
   return (
-    <div className="bg-[#282a36] w-screen h-screen flex items-end">
-      <div className="flex bg-[#44475a] text-gray-200 w-screen justify-between">
+    <>
+      <div className=" fixed bottom-0 flex bg-[#44475a] text-gray-200 w-screen justify-between">
         <div className="flex items-center p-4 gap-4 h-full">
           <img
             src="https://pbs.twimg.com/media/EXwlRDnWkAUV2mB.jpg"
@@ -161,6 +161,6 @@ export default function Player() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
