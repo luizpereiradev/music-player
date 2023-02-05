@@ -5,15 +5,16 @@ import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { IconContext } from "react-icons";
 import { AiOutlineHeart } from "react-icons/ai";
 import { GoMute, GoUnmute } from "react-icons/go";
+import { GlobalContext } from "../GlobalContext";
+import { useContext } from "react";
+import { IGlobalContext } from "../types";
+
 
 export default function Player() {
-  const TRACK =
-    "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/63/e5/43/63e543e3-20e7-c337-f42c-58983a5e4dec/mzaf_580404497919740347.plus.aac.p.m4a";
-
-  const [isPlaying, setIsPlaying] = useState(false);
-
   const [volume, setVolume] = useState(1);
+  const { playngState, soundOptions }  = useContext(GlobalContext) as IGlobalContext;
 
+  const [isPlaying, setIsPlaying] = playngState;
   const [time, setTime] = useState({
     min: 0,
     sec: 0,
@@ -26,7 +27,7 @@ export default function Player() {
 
   const [seconds, setSeconds] = useState();
 
-  const [play, { pause, duration, sound }] = useSound(TRACK, { volume: 1 });
+  const [play, { pause, duration, sound }] = soundOptions
 
   useEffect(() => {
     if (duration) {
@@ -55,16 +56,6 @@ export default function Player() {
     return () => clearInterval(interval);
   }, [sound]);
 
-  const playingButton = () => {
-    if (isPlaying) {
-      pause();
-      setIsPlaying(false);
-    } else {
-      play();
-      setIsPlaying(true);
-    }
-  };
-
   return (
     <>
       <div className=" fixed bottom-0 flex bg-[#44475a] text-gray-200 w-screen justify-between">
@@ -88,13 +79,13 @@ export default function Player() {
               </IconContext.Provider>
             </button>
             {!isPlaying ? (
-              <button onClick={playingButton}>
+              <button onClick={() => setIsPlaying(!isPlaying)}>
                 <IconContext.Provider value={{ size: "3em", color: "#FCFCFC" }}>
                   <AiFillPlayCircle />
                 </IconContext.Provider>
               </button>
             ) : (
-              <button onClick={playingButton}>
+              <button onClick={() => setIsPlaying(!isPlaying)}>
                 <IconContext.Provider value={{ size: "3em", color: "#FCFCFC" }}>
                   <AiFillPauseCircle />
                 </IconContext.Provider>

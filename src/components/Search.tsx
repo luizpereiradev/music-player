@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IconContext } from "react-icons";
+import { IGlobalContext } from "../types";
 import {
   AiFillPauseCircle,
   AiFillPlayCircle,
   AiOutlineSearch,
 } from "react-icons/ai";
-function Search() {
-  const [isPlaying, setIsPlaying] = useState(false);
+import { GlobalContext } from "../GlobalContext";
 
-  const playingButton = () => {
-    setIsPlaying(!isPlaying);
-  };
+function Search() {
+  const { playngState: [isPlaying, setIsPlaying]  }  = useContext(GlobalContext) as IGlobalContext;
+
   return (
     <div className="h-[calc(100vh-6rem)] w-full bg-[#30313d] min-w-[300px]">
       <div className="relative p-4">
@@ -31,7 +31,7 @@ function Search() {
             />
             <div className="opacity-0 duration-500 group-hover:-translate-y-5  transition-all  group-hover:opacity-100  absolute top-20 left-[60px]">
               {!isPlaying ? (
-                <button onClick={playingButton}>
+                <button onClick={() => setIsPlaying(!isPlaying)}>
                   <IconContext.Provider
                     value={{ size: "3em", color: "#FCFCFC" }}
                   >
@@ -39,7 +39,7 @@ function Search() {
                   </IconContext.Provider>
                 </button>
               ) : (
-                <button onClick={playingButton}>
+                <button onClick={() => setIsPlaying(!isPlaying)}>
                   <IconContext.Provider
                     value={{ size: "3em", color: "#FCFCFC" }}
                   >
