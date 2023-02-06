@@ -11,7 +11,7 @@ import { IGlobalContext } from "../types";
 
 export default function Player() {
   const [volume, setVolume] = useState(1);
-  const { playngState, soundOptions }  = useContext(GlobalContext) as IGlobalContext;
+  const { playngState, soundOptions, setTrack, musics, track }  = useContext(GlobalContext) as IGlobalContext;
 
   const [isPlaying, setIsPlaying] = playngState;
   const [time, setTime] = useState({
@@ -55,6 +55,35 @@ export default function Player() {
     return () => clearInterval(interval);
   }, [sound]);
 
+  const nextMusic = () => {
+    pause();
+    const index = musics.findIndex((music) => music.previewUrl === track);
+    if (index === musics.length - 1) {
+      setTrack(musics[0].previewUrl);
+    }else{
+      setTrack(musics[index + 1].previewUrl);
+    }
+  };
+
+  const prevMusic = () => {
+    pause();
+    const index = musics.findIndex((music) => music.previewUrl === track);
+    if (index === 0) {
+      setTrack(musics[musics.length - 1].previewUrl);
+    }else{
+      setTrack(musics[index - 1].previewUrl);
+    }
+  };
+
+  useEffect(() => {
+    if (seconds >= 27 && isPlaying) {
+      nextMusic();
+    }
+    if(seconds === 0 && isPlaying){
+      play()
+    }
+  }, [seconds]);
+
   return (
     <>
       <div className="z-10 fixed bottom-0 flex bg-[#44475a] text-gray-200 w-screen justify-between">
@@ -72,25 +101,35 @@ export default function Player() {
         </div>
         <div className="relative flex w-1/2 flex-col h-24 justify-end items-center">
           <div className="absolute top-4 flex">
-            <button>
+            <button onMouseDown={prevMusic} onClick={() => {
+                setIsPlaying(true)
+              }}>
               <IconContext.Provider value={{ size: "2.4em", color: "#FFFFFF" }}>
                 <BiSkipPrevious />
               </IconContext.Provider>
             </button>
             {!isPlaying ? (
-              <button onClick={() => setIsPlaying(!isPlaying)}>
+              <button onClick={() => {
+                setIsPlaying(!isPlaying)
+                // play()
+              }}>
                 <IconContext.Provider value={{ size: "3em", color: "#FCFCFC" }}>
                   <AiFillPlayCircle />
                 </IconContext.Provider>
               </button>
             ) : (
-              <button onClick={() => setIsPlaying(!isPlaying)}>
+              <button onClick={() => {
+                setIsPlaying(!isPlaying)
+                }}>
                 <IconContext.Provider value={{ size: "3em", color: "#FCFCFC" }}>
                   <AiFillPauseCircle />
                 </IconContext.Provider>
               </button>
             )}
-            <button>
+            <button onMouseDown={nextMusic} onClick={() => {
+                setIsPlaying(true)
+                play()
+              }}>
               <IconContext.Provider value={{ size: "2.4em", color: "#FFFFFF" }}>
                 <BiSkipNext />
               </IconContext.Provider>
