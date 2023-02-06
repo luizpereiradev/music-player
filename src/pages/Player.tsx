@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useSound from "use-sound";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { IconContext } from "react-icons";
@@ -58,7 +57,7 @@ export default function Player() {
 
   return (
     <>
-      <div className=" fixed bottom-0 flex bg-[#44475a] text-gray-200 w-screen justify-between">
+      <div className="z-10 fixed bottom-0 flex bg-[#44475a] text-gray-200 w-screen justify-between">
         <div className="flex items-center p-4 gap-4 h-full">
           <img
             src="https://pbs.twimg.com/media/EXwlRDnWkAUV2mB.jpg"

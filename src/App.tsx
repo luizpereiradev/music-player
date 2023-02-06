@@ -1,14 +1,14 @@
-import Aside from "./components/Aside";
-import Player from "./components/Player";
-import Search from "./components/Search";
+import Aside from "./pages/Aside";
+import Player from "./pages/Player";
+import Search from "./pages/Search/Search";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import Library from "./components/Library";
-import Album from "./components/Album";
+import Home from "./pages/Home";
+import Library from "./pages/Library";
+import Album from "./pages/Album";
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex">
+      <div className="flex min-h-screen bg-[#282a36]">
         <Aside />
         <Player />
         <Routes>
