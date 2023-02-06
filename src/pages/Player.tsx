@@ -76,7 +76,7 @@ export default function Player() {
   };
 
   useEffect(() => {
-    if (seconds >= 27 && isPlaying) {
+    if (seconds || 0 >= 27 && isPlaying) {
       nextMusic();
     }
     if(seconds === 0 && isPlaying){
@@ -111,7 +111,6 @@ export default function Player() {
             {!isPlaying ? (
               <button onClick={() => {
                 setIsPlaying(!isPlaying)
-                // play()
               }}>
                 <IconContext.Provider value={{ size: "3em", color: "#FCFCFC" }}>
                   <AiFillPlayCircle />
