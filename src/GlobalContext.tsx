@@ -14,10 +14,13 @@ export const GlobalContextProvider = ({
 }: GlobalContextProviderProps) => {
   const [atualAlbum, setAtualAlbum] = useState(1563510274);
   const [musics, setMusics] = useState([]);
-  const [track, setTrack] = useState(
-    "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/63/e5/43/63e543e3-20e7-c337-f42c-58983a5e4dec/mzaf_580404497919740347.plus.aac.p.m4a"
-  );
-  let soundOptions = useSound(track, { volume: 1 });
+  const [track, setTrack] = useState({
+    artistName: "Pineapple StormTv, Froid, BK, Djonga, Salve Malak & Hunter",
+    artworkUrl100: "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/44/3e/0d/443e0dad-b295-9c77-30ca-6507275b6166/0.jpg/100x100bb.jpg",
+    previewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPrevie…08-eee5-55ef5626b190/mzaf_2765432857154458962.plus.aac.p.m4a",
+    trackName: "Nasci pra Ser Grande (Tributo F.R)",
+  });
+  let soundOptions = useSound(track?.previewUrl, { volume: 1 });
   let [play, { pause }] = soundOptions;
   const playngState = useState(false);
   const [isPlaying] = playngState;
@@ -25,11 +28,12 @@ export const GlobalContextProvider = ({
   useEffect(() => {
     getMusics(atualAlbum).then((data) => {
       setMusics(data);
-      setTrack(data[1].previewUrl);
+      setTrack(data[1]);
     });
   }, [atualAlbum]);
 
   useEffect(() => {
+    console.log(track)
     if (isPlaying) {
       play();
     } else {

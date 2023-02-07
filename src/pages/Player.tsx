@@ -57,45 +57,45 @@ export default function Player() {
 
   const nextMusic = () => {
     pause();
-    const index = musics.findIndex((music) => music.previewUrl === track);
+    const index = musics.findIndex((music) => music.previewUrl === track.previewUrl);
     if (index === musics.length - 1) {
-      setTrack(musics[0].previewUrl);
+      setTrack(musics[0]);
     }else{
-      setTrack(musics[index + 1].previewUrl);
+      setTrack(musics[index + 1]);
     }
   };
 
   const prevMusic = () => {
     pause();
-    const index = musics.findIndex((music) => music.previewUrl === track);
+    const index = musics.findIndex((music) => music.previewUrl === track.previewUrl);
     if (index === 0) {
-      setTrack(musics[musics.length - 1].previewUrl);
+      setTrack(musics[musics.length - 1]);
     }else{
-      setTrack(musics[index - 1].previewUrl);
+      setTrack(musics[index - 1]);
     }
   };
 
   useEffect(() => {
-    if (seconds || 0 >= 27 && isPlaying) {
+    if (seconds && seconds >= 27 && isPlaying) {
       nextMusic();
     }
-    if(seconds === 0 && isPlaying){
+    if(!seconds && isPlaying){
       play()
     }
   }, [seconds]);
 
-  return (
+  if(track) return (
     <>
       <div className="z-10 fixed bottom-0 flex bg-[#44475a] text-gray-200 w-screen justify-between">
         <div className="flex items-center p-4 gap-4 h-full">
           <img
-            src="https://pbs.twimg.com/media/EXwlRDnWkAUV2mB.jpg"
+            src={track?.artworkUrl100}
             className="w-16 h-16 rounded-lg"
             alt="album"
           />
-          <div className="text-sm flex flex-col h-full">
-            <p>Clareou</p>
-            <p className="text-xs text-gray-300">Froid, Léo Casa 1</p>
+          <div className="text-sm flex max-w-[200px] overflow-hidden h-[36px]  flex-col">
+            <p>{track?.trackName}</p>
+            <p className="text-xs text-gray-300">{track?.artistName}</p>
           </div>
           <AiOutlineHeart className="ml-4" size={20} />
         </div>
@@ -127,7 +127,6 @@ export default function Player() {
             )}
             <button onMouseDown={nextMusic} onClick={() => {
                 setIsPlaying(true)
-                play()
               }}>
               <IconContext.Provider value={{ size: "2.4em", color: "#FFFFFF" }}>
                 <BiSkipNext />
