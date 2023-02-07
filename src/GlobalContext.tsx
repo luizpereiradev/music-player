@@ -12,7 +12,7 @@ type GlobalContextProviderProps = {
 export const GlobalContextProvider = ({
   children,
 }: GlobalContextProviderProps) => {
-  const [atualAlbum, setAtualAlbum] = useState(1563510274);
+  const [atualAlbum, setAtualAlbum] = useState('1563510274');
   const [musics, setMusics] = useState([]);
   const [track, setTrack] = useState({
     artistName: "Pineapple StormTv, Froid, BK, Djonga, Salve Malak & Hunter",
@@ -20,7 +20,7 @@ export const GlobalContextProvider = ({
     previewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPrevie…08-eee5-55ef5626b190/mzaf_2765432857154458962.plus.aac.p.m4a",
     trackName: "Nasci pra Ser Grande (Tributo F.R)",
 });
-  let soundOptions = useSound(track?.previewUrl, { volume: 1 });
+  let soundOptions = useSound(track.previewUrl, { volume: 1 });
   let [play, { pause }] = soundOptions;
   const playngState = useState(false);
   const [isPlaying] = playngState;
