@@ -12,14 +12,15 @@ type GlobalContextProviderProps = {
 export const GlobalContextProvider = ({
   children,
 }: GlobalContextProviderProps) => {
-  const [atualAlbum, setAtualAlbum] = useState('1563510274');
-  const [musics, setMusics] = useState([]);
+  const [atualAlbum, setAtualAlbum] = useState(1639584448);
   const [track, setTrack] = useState({
-    artistName: "Pineapple StormTv, Froid, BK, Djonga, Salve Malak & Hunter",
-    artworkUrl100: "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/44/3e/0d/443e0dad-b295-9c77-30ca-6507275b6166/0.jpg/100x100bb.jpg",
-    previewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPrevie…08-eee5-55ef5626b190/mzaf_2765432857154458962.plus.aac.p.m4a",
-    trackName: "Nasci pra Ser Grande (Tributo F.R)",
-});
+    artworkUrl100:"https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/38/86/76/388676f7-c292-83b4-262d-62e5cb3acecc/0.jpg/100x100bb.jpg",
+    artistName: "Froid & Leo Casa 1",
+    trackName: "Clareou",
+    previewUrl:`https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/57/4e/2f/574e2fb6-3e05-489c-d1bd-5c14d58853a0/mzaf_5336952176452453215.plus.aac.p.m4a`
+  }
+  );
+  const [musics, setMusics] = useState([]);
   let soundOptions = useSound(track.previewUrl, { volume: 1 });
   let [play, { pause }] = soundOptions;
   const playngState = useState(false);
@@ -29,6 +30,7 @@ export const GlobalContextProvider = ({
     getMusics(atualAlbum).then((data) => {
       setMusics(data);
       setTrack(data[1]);
+      console.log(data[1])
     });
   }, [atualAlbum]);
 
