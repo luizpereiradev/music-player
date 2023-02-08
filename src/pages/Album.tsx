@@ -13,7 +13,6 @@ function Album() {
   const [musics, setMusics] = useState([] as ITrack[]);
   useEffect(() => {
     if (id) getMusics(+id).then((musics) => {
-      console.log('1')
       setMusics(musics);
     });
   }, []);
@@ -60,8 +59,8 @@ function Album() {
       <div>
         <h1 className="text-2xl font-bold p-8">Songs</h1>
         <div className="flex flex-col gap-2 p-8">
-          {musics.filter((_, i) => i !== 0).map((music : ITrack) => (
-            <Music key={music.trackName} music={music} />
+          {musics.filter((_, i) => i !== 0).map((music : ITrack, i) => (
+            <Music index={i} key={music.trackName} music={music} />
           ))}
         </div>
       </div>

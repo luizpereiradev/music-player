@@ -23,6 +23,8 @@ export interface IGlobalContext {
   track: ITrack;
   setTrackNumber: React.Dispatch<React.SetStateAction<number>>;
   number: number;
+  setMyLibrary: React.Dispatch<React.SetStateAction<ITrack[]>>;
+  myLibrary: ITrack[];
 }
 
 export interface IAlbum {

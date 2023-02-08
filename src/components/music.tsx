@@ -1,15 +1,14 @@
 import {
   AiFillPauseCircle,
   AiFillPlayCircle,
-  AiOutlineHeart,
 } from "react-icons/ai";
 import { IGlobalContext, ITrack } from "../types";
 import { GlobalContext } from "../GlobalContext";
 import { useContext } from "react";
 import { IconContext } from "react-icons";
-import { BiPause } from "react-icons/bi";
+import Heart from "./Heart";
 
-function Music({ music }: { music: ITrack }) {
+function Music({ music, index, fav }: { music: ITrack, index: number, fav?: boolean }) {
   const {
     playngState: [isPlaying, setIsPlaying],
     setAtualAlbum,
@@ -24,12 +23,29 @@ function Music({ music }: { music: ITrack }) {
     <div className="hover:bg-[#44475a] p-2 rounded-lg flex items-center justify-between group  ">
       <div className="flex gap-3">
         <div className="w-10 group h-13 rounded-lg flex justify-center items-center">
-          <p className={`${music.trackNumber === number && music.collectionId === atualAlbum ? 'hidden': 'block'}  group-hover:hidden`}>{music.trackNumber}</p>
-          <div className={`${music.trackNumber === number && music.collectionId === atualAlbum ? 'flex': 'hidden'} group-hover:flex items-center justify-center`}>
-            {!isPlaying ||  music.trackNumber !== number || music.collectionId !== atualAlbum ? (
+          <p
+            className={`${
+              music.trackNumber === number && music.collectionId === atualAlbum
+                ? "hidden"
+                : "block"
+            }  group-hover:hidden`}
+          >
+            {index + 1}
+          </p>
+          <div
+            className={`${
+              music.trackNumber === number && music.collectionId === atualAlbum
+                ? "flex"
+                : "hidden"
+            } group-hover:flex items-center justify-center`}
+          >
+            {!isPlaying ||
+            music.trackNumber !== number ||
+            music.collectionId !== atualAlbum ? (
               <button
                 onMouseDown={() => {
                   setAtualAlbum(music.collectionId);
+                  if(fav) setAtualAlbum(1);
                   setTrackNumber(music.trackNumber);
                   pause();
                 }}
@@ -60,10 +76,7 @@ function Music({ music }: { music: ITrack }) {
         </div>
       </div>
       <div className="flex gap-10">
-        <AiOutlineHeart
-          className="ml-4 invisible group-hover:visible"
-          size={23}
-        />
+        <Heart music={music}/>
         <p>0:29</p>
       </div>
     </div>
