@@ -7,22 +7,31 @@ import { IGlobalContext, ITrack } from "../types";
 import { GlobalContext } from "../GlobalContext";
 import { useContext } from "react";
 import { IconContext } from "react-icons";
+import { BiPause } from "react-icons/bi";
 
 function Music({ music }: { music: ITrack }) {
   const {
     playngState: [isPlaying, setIsPlaying],
     setAtualAlbum,
+    atualAlbum,
+    setTrackNumber,
+    number,
+    soundOptions,
   } = useContext(GlobalContext) as IGlobalContext;
+
+  const [play, { pause }] = soundOptions;
   return (
     <div className="hover:bg-[#44475a] p-2 rounded-lg flex items-center justify-between group  ">
       <div className="flex gap-3">
         <div className="w-10 group h-13 rounded-lg flex justify-center items-center">
-          <p className="block group-hover:hidden">{music.trackNumber}</p>
-          <div className="hidden group-hover:flex items-center justify-center">
-            {!isPlaying ? (
+          <p className={`${music.trackNumber === number && music.collectionId === atualAlbum ? 'hidden': 'block'}  group-hover:hidden`}>{music.trackNumber}</p>
+          <div className={`${music.trackNumber === number && music.collectionId === atualAlbum ? 'flex': 'hidden'} group-hover:flex items-center justify-center`}>
+            {!isPlaying ||  music.trackNumber !== number || music.collectionId !== atualAlbum ? (
               <button
                 onMouseDown={() => {
                   setAtualAlbum(music.collectionId);
+                  setTrackNumber(music.trackNumber);
+                  pause();
                 }}
                 onClick={() => {
                   setIsPlaying(true);

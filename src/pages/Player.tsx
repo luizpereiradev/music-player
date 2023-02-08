@@ -11,7 +11,7 @@ import { IGlobalContext } from "../types";
 
 export default function Player() {
   const [volume, setVolume] = useState(1);
-  const { playngState, soundOptions, setTrack, musics, track }  = useContext(GlobalContext) as IGlobalContext;
+  const { playngState, soundOptions, setTrack, musics, track, setTrackNumber }  = useContext(GlobalContext) as IGlobalContext;
 
   const [isPlaying, setIsPlaying] = playngState;
   const [time, setTime] = useState({
@@ -56,16 +56,18 @@ export default function Player() {
   }, [sound]);
 
   const nextMusic = () => {
+    if(musics.length === 2) return;
     pause();
     const index = musics.findIndex((music) => music.previewUrl === track.previewUrl);
     if (index === musics.length - 1) {
-      setTrack(musics[0]);
+      setTrackNumber(1);
     }else{
-      setTrack(musics[index + 1]);
+      setTrackNumber((n) => n + 1)
     }
   };
 
   const prevMusic = () => {
+    if(musics.length === 2) return;
     pause();
     const index = musics.findIndex((music) => music.previewUrl === track.previewUrl);
     if (index === 0) {

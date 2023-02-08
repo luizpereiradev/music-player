@@ -14,12 +14,15 @@ export interface ITrack {
 export interface IGlobalContext {
   playngState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
   soundOptions: ReturnedValue;
+  atualAlbum: number;
   setAtualAlbum: React.Dispatch<React.SetStateAction<number>>;
   setTrack: React.Dispatch<
     React.SetStateAction<ITrack>
   >;
   musics: ITrack[];
   track: ITrack;
+  setTrackNumber: React.Dispatch<React.SetStateAction<number>>;
+  number: number;
 }
 
 export interface IAlbum {
