@@ -25,6 +25,8 @@ export interface IGlobalContext {
   number: number;
   setMyLibrary: React.Dispatch<React.SetStateAction<ITrack[]>>;
   myLibrary: ITrack[];
+  volume: number;
+  setVolume: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface IAlbum {

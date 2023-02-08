@@ -14,7 +14,6 @@ import { IGlobalContext } from "../types";
 import Heart from "../components/Heart";
 
 export default function Player() {
-  const [volume, setVolume] = useState(1);
   const {
     playngState,
     soundOptions,
@@ -22,8 +21,8 @@ export default function Player() {
     musics,
     track,
     setTrackNumber,
-    setMyLibrary,
-    myLibrary,
+    volume,
+    setVolume
   } = useContext(GlobalContext) as IGlobalContext;
 
   const [isPlaying, setIsPlaying] = playngState;
