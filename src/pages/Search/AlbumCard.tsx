@@ -14,7 +14,7 @@ function AlbumCard({ album }: { album: IAlbum}) {
     setAtualAlbum,
   } = useContext(GlobalContext) as IGlobalContext;
   return (
-    <div className="flex w-[210px] text-gray-300 overflow-hidden" onClick={() => navigate(`/albuns/${album.collectionId}`)}>
+    <div className="flex w-[210px] text-gray-300 overflow-hidden" onClick={() => navigate(`/album/${album.collectionId}`)}>
       <div className="w-[210px] h-[301px] flex flex-col gap-2 bg-[#44475a] p-3 rounded-lg">
         <div className="relative group mx-auto">
           <img

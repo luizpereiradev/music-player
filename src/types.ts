@@ -6,6 +6,7 @@ export interface ITrack {
   trackName: string;
   artistName: string;
   artworkUrl100: string;
+  trackNumber: number;
 }
 
 export interface IGlobalContext {
