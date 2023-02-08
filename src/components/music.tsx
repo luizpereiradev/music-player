@@ -22,7 +22,7 @@ function Music({ music, index, fav }: { music: ITrack, index: number, fav?: bool
   const [play, { pause }] = soundOptions;
   const favIndex = fav ? index + 1 : index;
   return (
-    <div className="hover:bg-[#44475a] p-2 rounded-lg flex items-center justify-between group  ">
+    <div className="hover:bg-[#44475a] p-2 rounded-lg flex items-center justify-between group-one  ">
       <div className="flex gap-3">
         <div className="w-10 group h-13 rounded-lg flex justify-center items-center">
           <p
@@ -30,7 +30,7 @@ function Music({ music, index, fav }: { music: ITrack, index: number, fav?: bool
               music === track
                 ? "hidden"
                 : "block"
-            }  group-hover:hidden`}
+            }  group-one-hover:hidden`}
           >
             {index + 1}
           </p>
@@ -39,7 +39,7 @@ function Music({ music, index, fav }: { music: ITrack, index: number, fav?: bool
               music === track
                 ? "flex"
                 : "hidden"
-            } group-hover:flex items-center justify-center`}
+            } group-one-hover:flex items-center justify-center`}
           >
             {(!isPlaying || favIndex !== number) && music.collectionId !== atualAlbum || !fav ? (
               <button
@@ -76,7 +76,7 @@ function Music({ music, index, fav }: { music: ITrack, index: number, fav?: bool
         </div>
       </div>
       <div className="flex gap-10">
-        <div className="invisible group-hover:visible">
+        <div className="invisible group-one-hover:visible">
           <Heart music={music}/>
         </div>
         <p>0:29</p>

@@ -9,5 +9,8 @@ module.exports = {
   },
   plugins: [
     require('@shrutibalasa/tailwind-grid-auto-fit'),
+    require("tailwindcss-scoped-groups")({
+      groups: ["one", "two"],
+  }),
   ],
 }

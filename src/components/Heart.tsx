@@ -9,7 +9,7 @@ function Heart({ music }: { music: ITrack}) {
     myLibrary,
   } = useContext(GlobalContext) as IGlobalContext;
   return (
-    <div  className="group" onClick={() => {
+    <div  className="group-two" onClick={() => {
       if(
         myLibrary.find(
           (track) => music.previewUrl === track.previewUrl
@@ -27,9 +27,9 @@ function Heart({ music }: { music: ITrack}) {
           />
         ) : (
           <>
-            <AiOutlineHeart className="ml-4 group-hover:hidden" size={20} />
+            <AiOutlineHeart className="ml-4 group-two-hover:hidden" size={20} />
             <AiFillHeart
-              className="ml-4 hidden group-hover:block group-hover:scale-110 group-hover:transition-all text-red-500"
+              className="ml-4 hidden group-two-hover:block  group-two-hover:scale-110  group-two-hover:transition-all text-red-500"
               size={20}
             />
           </>
