@@ -41,9 +41,8 @@ export const GlobalContextProvider = ({
 
   useEffect(() => {
     if (atualAlbum === 1) {
-      console.log("brasil");
       setMusics(myLibrary);
-      setTrack(myLibrary[number]);
+      setTrack(myLibrary[number - 1]);
       return;
     }
     getMusics(atualAlbum).then((data) => {

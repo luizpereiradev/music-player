@@ -16,16 +16,18 @@ function Music({ music, index, fav }: { music: ITrack, index: number, fav?: bool
     setTrackNumber,
     number,
     soundOptions,
+    track
   } = useContext(GlobalContext) as IGlobalContext;
 
   const [play, { pause }] = soundOptions;
+  const favIndex = fav ? index + 1 : index;
   return (
     <div className="hover:bg-[#44475a] p-2 rounded-lg flex items-center justify-between group  ">
       <div className="flex gap-3">
         <div className="w-10 group h-13 rounded-lg flex justify-center items-center">
           <p
             className={`${
-              music.trackNumber === number && music.collectionId === atualAlbum
+              music === track
                 ? "hidden"
                 : "block"
             }  group-hover:hidden`}
@@ -34,19 +36,17 @@ function Music({ music, index, fav }: { music: ITrack, index: number, fav?: bool
           </p>
           <div
             className={`${
-              music.trackNumber === number && music.collectionId === atualAlbum
+              music === track
                 ? "flex"
                 : "hidden"
             } group-hover:flex items-center justify-center`}
           >
-            {!isPlaying ||
-            music.trackNumber !== number ||
-            music.collectionId !== atualAlbum ? (
+            {(!isPlaying || favIndex !== number) && music.collectionId !== atualAlbum || !fav ? (
               <button
                 onMouseDown={() => {
                   setAtualAlbum(music.collectionId);
                   if(fav) setAtualAlbum(1);
-                  setTrackNumber(music.trackNumber);
+                  setTrackNumber(index + 1);
                   pause();
                 }}
                 onClick={() => {
@@ -76,7 +76,9 @@ function Music({ music, index, fav }: { music: ITrack, index: number, fav?: bool
         </div>
       </div>
       <div className="flex gap-10">
-        <Heart music={music}/>
+        <div className="invisible group-hover:visible">
+          <Heart music={music}/>
+        </div>
         <p>0:29</p>
       </div>
     </div>
