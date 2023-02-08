@@ -7,6 +7,8 @@ export interface ITrack {
   artistName: string;
   artworkUrl100: string;
   trackNumber: number;
+  collectionName: string;
+  collectionId: number;
 }
 
 export interface IGlobalContext {

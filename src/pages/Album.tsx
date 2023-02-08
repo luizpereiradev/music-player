@@ -6,48 +6,49 @@ import { useContext } from "react";
 import { IGlobalContext, ITrack } from "../types";
 import Music from "../components/music";
 import getMusics from "../services/getMusics";
-import {useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Album() {
   const { id } = useParams();
   const [musics, setMusics] = useState([] as ITrack[]);
   useEffect(() => {
-    getMusics(+id).then((musics) => {
+    if (id) getMusics(+id).then((musics) => {
       console.log('1')
       setMusics(musics);
     });
   }, []);
   const {
     playngState: [isPlaying, setIsPlaying],
+    setAtualAlbum,
   } = useContext(GlobalContext) as IGlobalContext;
   return (
     <div className="w-full text-gray-200 bg-[#30313d]">
-      <div className="flex p-8 gap-3 items-end">
+      <div className="flex p-10 gap-5 items-end">
         <img
-          src="https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/38/86/76/388676f7-c292-83b4-262d-62e5cb3acecc/0.jpg/100x100bb.jpg"
+          src={musics[0]?.artworkUrl100}
           alt="album"
           className="w-40 h-40"
         />
         <div>
-          <h1 className="font-bold text-3xl">{musics[0]?.colectionName}</h1>
+          <h1 className="font-bold text-3xl">{musics[0]?.collectionName}</h1>
           <p className="pb-6">{musics[0]?.artistName}</p>
-          <div className="flex items-center">
-            {!isPlaying ? (
+          <div>
+          {!isPlaying ? (
               <button
-                onClick={() => {
-                  setIsPlaying(!isPlaying);
-                }}
-              >
+              onMouseDown={() => {
+                setAtualAlbum(musics[0].collectionId);
+              }}
+              onClick={() => {
+                setIsPlaying(true);
+                }}>
                 <IconContext.Provider value={{ size: "3em", color: "#FCFCFC" }}>
                   <AiFillPlayCircle />
                 </IconContext.Provider>
               </button>
             ) : (
-              <button
-                onClick={() => {
-                  setIsPlaying(!isPlaying);
-                }}
-              >
+              <button onClick={() => {
+                setIsPlaying(false);
+                }}>
                 <IconContext.Provider value={{ size: "3em", color: "#FCFCFC" }}>
                   <AiFillPauseCircle />
                 </IconContext.Provider>
