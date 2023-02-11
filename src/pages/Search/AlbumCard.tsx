@@ -33,12 +33,14 @@ function AlbumCard({ album }: { album: IAlbum}) {
                 e.stopPropagation();
                 setAtualAlbum(album.collectionId);
                 if(album.collectionId === atualAlbum) return;
-                pause();
+                setIsPlaying(false);
                 setTrackNumber(1);
               }}
               onClick={(e) => {
                 e.stopPropagation();
-                setIsPlaying(true);
+                setTimeout(() => {
+                  setIsPlaying(true);
+                }, 1000);
                 }}>
                 <IconContext.Provider value={{ size: "3em", color: "#FCFCFC" }}>
                   <AiFillPlayCircle />

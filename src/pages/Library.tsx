@@ -1,5 +1,3 @@
-import { IconContext } from "react-icons";
-import { AiFillPauseCircle, AiFillPlayCircle } from "react-icons/ai";
 import { GlobalContext } from "../GlobalContext";
 import { useContext } from "react";
 import { IGlobalContext, ITrack } from "../types";

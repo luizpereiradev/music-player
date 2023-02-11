@@ -2,16 +2,15 @@ import { useEffect, useState } from "react";
 import {
   AiFillPlayCircle,
   AiFillPauseCircle,
-  AiFillHeart,
 } from "react-icons/ai";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { IconContext } from "react-icons";
-import { AiOutlineHeart } from "react-icons/ai";
 import { GoMute, GoUnmute } from "react-icons/go";
 import { GlobalContext } from "../GlobalContext";
 import { useContext } from "react";
 import { IGlobalContext } from "../types";
 import Heart from "../components/Heart";
+import { useNavigate } from "react-router-dom";
 
 export default function Player() {
   const {
@@ -22,9 +21,11 @@ export default function Player() {
     track,
     setTrackNumber,
     volume,
-    setVolume
+    setVolume,
+    atualAlbum
   } = useContext(GlobalContext) as IGlobalContext;
 
+  const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = playngState;
   const [time, setTime] = useState({
     min: 0,
@@ -49,6 +50,10 @@ export default function Player() {
         min: min,
         sec: secRemain,
       });
+    }
+    if(isPlaying){
+      console.log('zezinho')
+      play();
     }
   }, [isPlaying]);
 
@@ -97,7 +102,8 @@ export default function Player() {
     if (seconds && seconds >= 27 && isPlaying) {
       nextMusic();
     }
-    if (!seconds && isPlaying) {
+    if(isPlaying && seconds === 0){
+      console.log('marcelinho')
       play();
     }
   }, [seconds]);
@@ -106,7 +112,13 @@ export default function Player() {
     return (
       <>
         <div className="z-10 fixed bottom-0 flex bg-[#44475a] text-gray-200 w-screen justify-between">
-          <div className="flex items-center p-4 gap-4 h-full">
+          <div onClick={() => {
+            if(atualAlbum === 1) {
+              navigate(`/library`)
+              return
+            }
+            navigate(`/album/${track?.collectionId}`)
+          }} className="flex items-center p-4 gap-4 h-full">
             <img
               src={track?.artworkUrl100}
               className="w-16 h-16 rounded-lg"
@@ -173,7 +185,10 @@ export default function Player() {
             <div className="w-full">
               <div className="flex justify-between px-2">
                 <p>
-                  {currTime.min}:{currTime.sec}
+                  {
+                    isNaN(currTime.min) ? 'Erro, escolha outra musica' :
+                    `${currTime.min}:${currTime.sec}`
+                  }
                 </p>
                 <p>
                   {time.min}:{time.sec}

@@ -1,56 +1,60 @@
-import {
-  AiFillPauseCircle,
-  AiFillPlayCircle,
-} from "react-icons/ai";
+import { AiFillPauseCircle, AiFillPlayCircle } from "react-icons/ai";
 import { IGlobalContext, ITrack } from "../types";
 import { GlobalContext } from "../GlobalContext";
 import { useContext } from "react";
 import { IconContext } from "react-icons";
 import Heart from "./Heart";
 
-function Music({ music, index, fav }: { music: ITrack, index: number, fav?: boolean }) {
+function Music({
+  music,
+  index,
+  fav,
+}: {
+  music: ITrack;
+  index: number;
+  fav?: boolean;
+}) {
   const {
     playngState: [isPlaying, setIsPlaying],
     setAtualAlbum,
-    atualAlbum,
     setTrackNumber,
-    number,
     soundOptions,
-    track
+    track,
   } = useContext(GlobalContext) as IGlobalContext;
 
   const [play, { pause }] = soundOptions;
-  const favIndex = fav ? index + 1 : index;
   return (
     <div className="hover:bg-[#44475a] p-2 rounded-lg flex items-center justify-between group-one  ">
       <div className="flex gap-3">
         <div className="w-10 group h-13 rounded-lg flex justify-center items-center">
           <p
             className={`${
-              music === track
-                ? "hidden"
-                : "block"
+              music.trackName === track.trackName ? "hidden" : "block"
             }  group-one-hover:hidden`}
           >
             {index + 1}
           </p>
           <div
             className={`${
-              music === track
-                ? "flex"
-                : "hidden"
+              music.trackName === track.trackName ? "flex" : "hidden"
             } group-one-hover:flex items-center justify-center`}
           >
-            {(!isPlaying || favIndex !== number) && music.collectionId !== atualAlbum || !fav ? (
+            {!isPlaying || music.trackName !== track.trackName ? (
               <button
                 onMouseDown={() => {
-                  setAtualAlbum(music.collectionId);
-                  if(fav) setAtualAlbum(1);
+                  console.log(music !== track)
+                  if (fav) {
+                    setAtualAlbum(1);
+                  } else {
+                    setAtualAlbum(music.collectionId);
+                  }
                   setTrackNumber(index + 1);
                   pause();
                 }}
                 onClick={() => {
-                  setIsPlaying(true);
+                  setTimeout(() => {
+                    setIsPlaying(true);
+                  }, 1000);
                 }}
               >
                 <IconContext.Provider value={{ size: "2em", color: "#FCFCFC" }}>
@@ -77,7 +81,7 @@ function Music({ music, index, fav }: { music: ITrack, index: number, fav?: bool
       </div>
       <div className="flex gap-10">
         <div className="invisible group-one-hover:visible">
-          <Heart music={music}/>
+          <Heart music={music} />
         </div>
         <p>0:29</p>
       </div>

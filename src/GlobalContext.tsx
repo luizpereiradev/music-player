@@ -32,7 +32,7 @@ export const GlobalContextProvider = ({
   let soundOptions = useSound(track?.previewUrl, { volume: volume });
   let [play, { pause }] = soundOptions;
   const playngState = useState(false);
-  const [isPlaying] = playngState;
+  const [isPlaying, setIsPlaying ] = playngState;
   const [number, setTrackNumber] = useState(1);
 
   useEffect(() => {
@@ -45,16 +45,18 @@ export const GlobalContextProvider = ({
       setTrack(myLibrary[number - 1]);
       return;
     }
+    console.log(atualAlbum);
     getMusics(atualAlbum).then((data) => {
       setMusics(data);
+      console.log('oi')
       setTrack(data[number]);
+      console.log('oi2')
+      // setIsPlaying(true);
     });
   }, [atualAlbum, number]);
 
   useEffect(() => {
-    if (isPlaying) {
-      play();
-    } else {
+    if (!isPlaying) {
       pause();
     }
   }, [isPlaying]);

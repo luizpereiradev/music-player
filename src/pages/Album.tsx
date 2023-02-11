@@ -38,7 +38,9 @@ function Album() {
                 setAtualAlbum(musics[0].collectionId);
               }}
               onClick={() => {
-                setIsPlaying(true);
+                setTimeout(() => {
+                  setIsPlaying(true);
+                }, 1000);
                 }}>
                 <IconContext.Provider value={{ size: "3em", color: "#FCFCFC" }}>
                   <AiFillPlayCircle />

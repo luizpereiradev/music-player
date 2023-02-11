@@ -9,7 +9,8 @@ function Heart({ music }: { music: ITrack}) {
     myLibrary,
   } = useContext(GlobalContext) as IGlobalContext;
   return (
-    <div  className="group-two" onClick={() => {
+    <div  className="group-two" onClick={(e) => {
+      e.stopPropagation();
       if(
         myLibrary.find(
           (track) => music.previewUrl === track.previewUrl
