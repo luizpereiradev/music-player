@@ -42,7 +42,6 @@ function Music({
             {!isPlaying || music.trackName !== track.trackName ? (
               <button
                 onMouseDown={() => {
-                  console.log(music !== track)
                   if (fav) {
                     setAtualAlbum(1);
                   } else {

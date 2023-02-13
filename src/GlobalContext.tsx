@@ -17,7 +17,7 @@ export const GlobalContextProvider = ({
   const [myLibrary, setMyLibrary] = useState<ITrack[]>(
     JSON.parse(library || "[]")
   );
-  const [atualAlbum, setAtualAlbum] = useState(1639584448);
+  const [atualAlbum, setAtualAlbum] = useState(434520888);
   const [track, setTrack] = useState({
     artworkUrl100:
       "https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/38/86/76/388676f7-c292-83b4-262d-62e5cb3acecc/0.jpg/100x100bb.jpg",
