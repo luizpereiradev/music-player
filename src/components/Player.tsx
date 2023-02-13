@@ -9,7 +9,7 @@ import { GoMute, GoUnmute } from "react-icons/go";
 import { GlobalContext } from "../GlobalContext";
 import { useContext } from "react";
 import { IGlobalContext } from "../types";
-import Heart from "../components/Heart";
+import Heart from "./Heart";
 import { useNavigate } from "react-router-dom";
 
 export default function Player() {

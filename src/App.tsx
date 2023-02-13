@@ -1,5 +1,5 @@
-import Aside from "./pages/Aside";
-import Player from "./pages/Player";
+import Aside from "./components/Aside";
+import Player from "./components/Player";
 import Search from "./pages/Search/Search";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Library from "./pages/Library";
