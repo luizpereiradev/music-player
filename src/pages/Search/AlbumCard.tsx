@@ -14,12 +14,11 @@ function AlbumCard({ album }: { album: IAlbum}) {
     setAtualAlbum,
     setTrackNumber,
     atualAlbum,
-    soundOptions,
   } = useContext(GlobalContext) as IGlobalContext;
-  const [play, { pause }] = soundOptions;
   return (
-    <div className="flex w-[210px] text-gray-300 overflow-hidden" onClick={() => navigate(`/album/${album.collectionId}`)}>
-      <div className="w-[210px] h-[301px] flex flex-col gap-2 bg-[#44475a] p-3 rounded-lg">
+    <div className="flex w-[210px] text-gray-300 bg-[#44475a] rounded-lg group cursor-pointer hover:scale-[101%] overflow-hidden" onClick={() => navigate(`/album/${album.collectionId}`)}>
+      {/* //aumentar tamanho do card */}
+      <div className="w-[210px] h-[301px] flex flex-col gap-2 bg-[#44475a] p-3 ">
         <div className="relative group mx-auto">
           <img
             src={album.artworkUrl100}
