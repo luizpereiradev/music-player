@@ -26,13 +26,15 @@ export const GlobalContextProvider = ({
     trackNumber: 1,
     collectionName: "Froid & Leo Casa 1",
     collectionId: 1639584448,
-    previewUrl: `https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/57/4e/2f/574e2fb6-3e05-489c-d1bd-5c14d58853a0/mzaf_5336952176452453215.plus.aac.p.m4a`,
+    previewUrl: `https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/dd/d6/fd/ddd6fdd6-095d-bd8b-8c2a-7dcba7335109/mzaf_4592119553780691670.plus.aac.p.m4a`,
   });
+
+
   const [musics, setMusics] = useState<ITrack[]>([]);
   let soundOptions = useSound(track?.previewUrl, { volume: volume });
   let [play, { pause }] = soundOptions;
   const playngState = useState(false);
-  const [isPlaying, setIsPlaying ] = playngState;
+  const [isPlaying] = playngState;
   const [number, setTrackNumber] = useState(1);
 
   useEffect(() => {
@@ -45,13 +47,10 @@ export const GlobalContextProvider = ({
       setTrack(myLibrary[number - 1]);
       return;
     }
-    console.log(atualAlbum);
     getMusics(atualAlbum).then((data) => {
+      console.log(data[1].previewUrl)
       setMusics(data);
-      console.log('oi')
       setTrack(data[number]);
-      console.log('oi2')
-      // setIsPlaying(true);
     });
   }, [atualAlbum, number]);
 
