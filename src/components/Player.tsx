@@ -52,7 +52,6 @@ export default function Player() {
       });
     }
     if(isPlaying){
-      console.log('zezinho')
       play();
     }
   }, [isPlaying]);
@@ -103,7 +102,6 @@ export default function Player() {
       nextMusic();
     }
     if(isPlaying && seconds === 0){
-      console.log('marcelinho')
       play();
     }
   }, [seconds]);
